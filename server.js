@@ -6,7 +6,13 @@ let server;
 
 async function main() {
 	try {
-		await mongoose.connect(config.database_url);
+		await mongoose.connect(config.database_url, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 10000,
+  socketTimeoutMS: 45000,
+  maxPoolSize: 10,
+});
 		server = app.listen(config.port, () => {
 			console.log(`MERN Backend Template app listening on port ${config.port}`);
 		});
